@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Embedded Systems MCQ Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9f9;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .options button {
+      display: block;
+      margin: 5px 0;
+      padding: 10px;
+      width: 100%;
+      text-align: left;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f0f0f0;
+      cursor: pointer;
+    }
+    .options button.correct {
+      background-color: #c8e6c9;
+      border-color: #2e7d32;
+    }
+    .options button.incorrect {
+      background-color: #ffcdd2;
+      border-color: #c62828;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container" id="quiz"></div>
+
+  <script>
+    const questions = [
+      {
+        q: "What is the difference between `int a;` and `int *a;`?",
+        options: [
+          "`int a;` declares an integer, `int *a;` declares a pointer to an integer.",
+          "Both are same.",
+          "`int a;` is used for arrays.",
+          "`int *a;` is used only in Assembly."
+        ],
+        answer: 0
+      },
+      {
+        q: "What does the `volatile` keyword do in C?",
+        options: [
+          "It prevents the compiler from optimizing the variable.",
+          "It makes the variable global.",
+          "It creates a pointer.",
+          "It is only used in C++."
+        ],
+        answer: 0
+      },
+      {
+        q: "What is a semaphore in RTOS?",
+        options: [
+          "It manages access to shared resources.",
+          "It controls voltage.",
+          "It handles ADC conversion.",
+          "It is used for I2C communication."
+        ],
+        answer: 0
+      },
+      {
+        q: "What is the function of a watchdog timer?",
+        options: [
+          "Resets the system if it hangs.",
+          "Increases clock speed.",
+          "Controls PWM.",
+          "Used for storing data."
+        ],
+        answer: 0
+      },
+      {
+        q: "Which of the following is a feature of C++ but not C?",
+        options: [
+          "Classes and Objects",
+          "Pointers",
+          "Functions",
+          "Loops"
+        ],
+        answer: 0
+      }
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+
+    questions.forEach((item, index) => {
+      const qElem = document.createElement("div");
+      qElem.classList.add("question-block");
+      qElem.innerHTML = `<div class='question'>${index + 1}. ${item.q}</div>`;
+
+      const opts = document.createElement("div");
+      opts.className = "options";
+
+      item.options.forEach((opt, i) => {
+        const btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.onclick = function () {
+          const allButtons = btn.parentElement.querySelectorAll("button");
+          allButtons.forEach((b, idx) => {
+            b.disabled = true;
+            if (idx === item.answer) {
+              b.classList.add("correct");
+            } else if (b === btn) {
+              b.classList.add("incorrect");
+            }
+          });
+        };
+        opts.appendChild(btn);
+      });
+      qElem.appendChild(opts);
+      quizContainer.appendChild(qElem);
+    });
+  </script>
+</body>
+</html>
